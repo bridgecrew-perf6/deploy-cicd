@@ -9,22 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Production
-        uses: actions/checkout@v2
-      - name: Use Node.js 17.x
-        uses: actions/setup-node@v1
+      - uses: actions/checkout@v2
+      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
-          node-version: 17.x
-      - run: NPM_CONFIG_PRODUCTION=false
-      - run: yarn install
-      - run: yarn run build
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
-        with:
-          args: deploy --dir=build --prod
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "testecicd51512312"
+          heroku_app_name: "testecicd51512312" #Must be unique in Heroku
           heroku_email: "eduardorerick@gmail.com"
-          remote_branch: "main"
-          env:
-          NODE_ENV: development
+          buildpack: "https://github.com/eduardorerick/deploy-cicd.git"
