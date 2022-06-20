@@ -15,3 +15,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "testecicd51512312" #Must be unique in Heroku
           heroku_email: "eduardorerick@gmail.com"
+          buildpack: "https://github.com/eduardorerick/deploy-cicd.git"
