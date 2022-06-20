@@ -1,1 +1,1 @@
-web: npm run dev --port=8080
+web: yarn dev
