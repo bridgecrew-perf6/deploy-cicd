@@ -1,2 +1,1 @@
-web: npm install
-release: npm run dev
+web: npm run dev
