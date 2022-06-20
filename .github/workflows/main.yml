@@ -26,3 +26,5 @@ jobs:
           heroku_app_name: "testecicd51512312"
           heroku_email: "eduardorerick@gmail.com"
           remote_branch: "main"
+          env:
+          NODE_ENV: development

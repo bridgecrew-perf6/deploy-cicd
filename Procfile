@@ -1,2 +1,1 @@
-web: yarn
-release: yarn dev
+web: yarn dev
