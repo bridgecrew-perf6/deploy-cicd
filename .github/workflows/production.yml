@@ -1,4 +1,4 @@
-name: Production workflow
+name: CI/CD workflow
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main
 
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - name: Build
@@ -16,14 +16,21 @@ jobs:
         with:
           node-version: 17.x
       - run: npm install
-      - run: npm run build --if-present
-
+      - run: npm run test
+  build:
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
       - name: CI
         uses: actions/setup-node@v1
         with:
           node-version: 17.x
-      - run: npm run test
+      - run: npm run build --if-present
 
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+      steps: 
       - name: CD
         uses: nwtgck/actions-netlify@v1.2
         with:
