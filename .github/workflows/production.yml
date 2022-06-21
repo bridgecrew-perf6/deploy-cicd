@@ -15,13 +15,20 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: 17.x
-      - run: NPM_CONFIG_PRODUCTION=false
       - run: npm install
       - run: npm run build --if-present
-      - name: Deploy to Heroku
-        uses: akhileshns/heroku-deploy@v3.12.12
+
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v1.2
         with:
-          args: deploy --dir=dist --prod
-          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-          heroku_app_name: "testecicd51512312"
-          heroku_email: "eduardorerick@gmail.com"
+          publish-dir: './dist'
+          production-branch: main
+          github-token: ${{ secrets.DEPLOY_TOKEN }}
+          deploy-message: "Deploy from GitHub Actions"
+          enable-pull-request-comment: false
+          enable-commit-comment: true
+          overwrites-pull-request-comment: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        timeout-minutes: 1
