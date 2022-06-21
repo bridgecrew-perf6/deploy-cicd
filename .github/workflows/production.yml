@@ -18,7 +18,7 @@ jobs:
       - run: npm install
       - run: npm run test
   CD:
-    needs: test
+    needs: CI
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
