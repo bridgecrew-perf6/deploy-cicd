@@ -1,1 +1,1 @@
-web: yarn dev --host
+web: npm run dev
